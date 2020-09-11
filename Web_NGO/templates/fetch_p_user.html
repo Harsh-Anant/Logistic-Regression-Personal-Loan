@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <style>
+            
+            table{
+                border-collapse: collapse;
+                width:100%;
+                box-shadow: 10px 10px 10px 10px #888888;
+            }
+            td{
+                text-align:left;
+                padding:8px;
+
+            }
+            th{
+                text-align:left;
+                padding:8px;
+                background-color:#d6c578;
+
+            }
+            tr:nth-child(odd){
+                background-color:greenyellow;
+            }
+            tr:nth-child(even){
+                background-color:lightyellow;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="fetch_p_user" method="get">
+            {% csrf_token %}
+            <input type="text" name="user_name" minlength="6" maxlength="8" pattern="[A-Z|a-z|0-9]+" placeholder="Enter ur username" autocomplete="off" title="Can contain uppercase, lowercase letters and numbers to." required/>
+            <input type="submit" align="centre" name="submit" class="btn btn-info" value="Search" />
+        </form>
+        <p><b><h1 align="center">PPE Details</h1></b></p>
+        <table cellspacing="6" cellpadding="6" id="table1">
+            <th>Id</th>
+            <th>PPE Name</th>
+            <th>PPE Quantity</th>
+            <th>Address</th>
+            <th>Phone</th>
+        <tbody id="table2"></tbody>
+        </table>
+           
+
+    </body>
+</html>
+<script>
+    $("#fetch_p_user").submit(function(e){
+        e.preventDefault();
+        $("#table2").empty();
+        var serializedData=$(this).serialize();
+        $.ajax({
+            type:'GET',
+            url:"{% url 'fetch_p_user' %}",
+            data:serializedData,
+            dataType:'json',
+            success:function(response){
+                if(response.Kits!='Not a valid username.' && response.Kits!='No added data with this username.'){
+                for(var i=0;i<response.Kits.length;i++){
+                    html='<tr>';
+                    html+='<td>'+response.Kits[i].id+'</td>';
+                    html+='<td>'+response.Kits[i].kiit_name+'</td>';
+                    html+='<td>'+response.Kits[i].kiit_quantity+'</td>';
+                    html+='<td>'+response.Kits[i].address+'</td>';
+                    html+='<td>'+response.Kits[i].ph_no+'</td>';
+                    html+='</tr>';
+                    $("#table2").append(html);}}
+                else{
+                    alert(response.Kits);
+                }
+                    
+            },
+            error: function(response){
+              alert("response:"+response.name);
+    
+            }
+    
+    
+    
+    
+            
+    
+        });
+    
+    });
+    </script>
+
+<!--div>
+     {% block content %}
+        
+        <p><b>PPE Details</b></p>
+        <table cellspacing="6" cellpadding="6" border="1">
+            <th>Id</th>
+            <th>PPE Name</th>
+            <th>PPE Quantity</th>
+            <th>Phone</th>
+            <th>Address</th>
+
+        {% for Kit in Kits %}
+        <tr>
+        <td>{{ Kit.id }}</td>
+        <td>{{ Kit.kiit_name }}</td>
+        <td>{{ Kit.kiit_quantity }}</td>
+        <td>{{ Kit.ph_no }}</td>
+        <td>{{ Kit.address }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {{ Message }}
+    {% endblock %}
+<!-->

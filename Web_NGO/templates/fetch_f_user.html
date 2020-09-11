@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <style>
+            
+            table{
+                border-collapse: collapse;
+                width:100%;
+                box-shadow: 10px 10px 10px 10px #888888;
+            }
+            td{
+                text-align:left;
+                padding:8px;
+
+            }
+            th{
+                text-align:left;
+                padding:8px;
+                background-color:#d6c578;
+
+            }
+            tr:nth-child(odd){
+                background-color:greenyellow;
+            }
+            tr:nth-child(even){
+                background-color:lightyellow;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="fetch_f_user" method="get">
+            {% csrf_token %}
+            <input type="text" name="user_name" minlength="6" maxlength="8" pattern="[A-Z|a-z|0-9]+" placeholder="Enter ur username" autocomplete="off" title="Can contain uppercase, lowercase letters and numbers to." required/>
+            <input type="submit" align="centre" name="submit" class="btn btn-info" value="Search" />
+        </form>
+        <p><b><h1 align="center">Food Details</h1></b></p>
+        <table cellspacing="6" cellpadding="6" id="table1">
+            <th>Id</th>
+            <th>Food Name</th>
+            <th>Food Quantity</th>
+            <th>Perishable(True/False)</th>
+            <th>Expiry Date</th>
+            <th>Type(Solid/Liquid)</th>
+            <th>Address</th>
+            <th>Phone</th>
+        <tbody id="table2"></tbody>
+        </table>
+
+        
+
+    </body>
+</html>
+<script>
+    $("#fetch_f_user").submit(function(e){
+        e.preventDefault();
+        $("#table2").empty();
+        var serializedData=$(this).serialize();
+        $.ajax({
+            type:'GET',
+            url:"{% url 'fetch_f_user' %}",
+            data:serializedData,
+            dataType:'json',
+            success:function(response){
+                if(response.Foods!='Not a valid username.' && response.Foods!='No added data with this username.'){
+                for(var i=0;i<response.Foods.length;i++){
+                    html='<tr>';
+                    html+='<td>'+response.Foods[i].id+'</td>';
+                    html+='<td>'+response.Foods[i].item_name+'</td>';
+                    html+='<td>'+response.Foods[i].item_quamntity+'</td>';
+                    html+='<td>'+response.Foods[i].perishable+'</td>';
+                    html+='<td>'+response.Foods[i].expiry_date+'</td>';
+                    html+='<td>'+response.Foods[i].typ+'</td>';
+                    html+='<td>'+response.Foods[i].address+'</td>';
+                    html+='<td>'+response.Foods[i].ph_no+'</td>';
+                    html+='</tr>';
+                    $("#table2").append(html);}}
+                else{
+                    alert(response.Foods);
+                }
+                    
+            },
+            error: function(response){
+              alert("response:"+response.name);
+    
+            }
+    
+    
+    
+    
+            
+    
+        });
+    
+    });
+    </script>
+<!--div>
+    {% block content %}
+        
+        <p><b>Food Details</b></p>
+        <table cellspacing="6" cellpadding="6" border="1">
+            <th>Id</th>
+            <th>Food Name</th>
+            <th>Food Quantity</th>
+            <th>Perishable(True/False)</th>
+            <th>Expiry Date</th>
+            <th>Type(Solid/Liquid)</th>
+            <th>Phone</th>
+            <th>Address</th>
+
+        {% for food in Foods %}
+        <tr>
+        <td>{{ food.id }}</td>
+        <td>{{ food.item_name }}</td>
+        <td>{{ food.item_quamntity }}</td>
+        <td>{{ food.perishable }} </td>
+        <td>{{ food.expiry_date }}</td>
+        <td>{{ food.typ }}</td>
+        <td>{{ food.ph_no }}</td>
+        <td>{{ food.address }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {{ Message }}
+
+    {% endblock %}
+    
+    <!-->

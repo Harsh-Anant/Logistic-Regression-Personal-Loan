@@ -1,0 +1,177 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <style>
+            
+            table{
+                border-collapse: collapse;
+                width:100%;
+                box-shadow: 10px 10px 10px 10px #888888;
+            }
+            td{
+                text-align:left;
+                padding:8px;
+
+            }
+            th{
+                text-align:left;
+                padding:8px;
+                background-color:#d6c578;
+
+            }
+            tr:nth-child(odd){
+                background-color:greenyellow;
+            }
+            tr:nth-child(even){
+                background-color:lightyellow;
+            }
+            .wrapper input[type=text], .wrapper input[type=password], .wrapper input[type=email], .wrapper input[type=tel],.wrapper input[type=date],.wrapper input[type=number],
+            .wrapper input[type=select],.wrapper input[type=date] {
+                border: none;
+                border-bottom: 1px solid #ddd;
+                background: transparent;
+                outline: none;
+                height: 30px;                                                     
+                font-size: 16px;
+                opacity: 1;
+                color:  #8383af;
+                width: 30%;
+                margin-bottom: 20px;
+                }
+                .wrapper input[type=submit]{
+                border:none;
+                outline:none;
+                height: 40px;
+                background:#24E7F4;
+                color: #FFFFFF;
+                font-size:16px;
+                font-weight: bold;
+                width: 30%;
+                margin-bottom: 20px;
+                }
+                
+                
+                .wrapper input[type=submit]:hover{
+                cursor: pointer;
+                color: black;
+                background-color:rgba(31,179,194, 0.89);
+                }
+            
+        </style>
+    </head>
+    <body>
+        {% block content %}
+        <h1 align="center">{{ Error }}</h1>
+        
+        <p><b><h1 align="center">PPE Details</h1></b></p><div>
+        <table cellspacing="6" cellpadding="6">
+            <th>Id</th>
+            <th>PPE Name</th>
+            <th>PPE Quantity</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Status</th>
+
+        {% for kit in Kits %}
+        <tr>
+        <td>{{ kit.id }}</td>   
+        <td>{{ kit.kiit_name }}</td>
+        <td>{{ kit.kiit_quantity }}</td>
+        <td>{{ kit.address }}</td>
+        <td>{{ kit.ph_no }}</td>
+        <td>{{ kit.status }}</td>
+        </tr>
+        {% endfor %}
+    </table></div>
+    {% endblock %}
+    
+        
+    <br><br>
+    <div class="wrapper">
+        <h2>Enter the details below to delete</h2>
+        <form id="delete_p" method="post">
+            {% csrf_token %}
+            <input type="number" name="id" min="0" placeholder="Enter the id of the record" autocomplete="off" required/>
+           <br><input type="submit" align="centre" name="submit" class="btn btn-info" value="Delete" />
+        </form>
+        <div class="wrapper">
+            <form action="after_login">
+                <input type="submit" name="submit" value="Back">
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>
+<script>
+$("#delete_p").submit(function(e){
+    e.preventDefault();
+    var serializedData=$(this).serialize();
+    $.ajax({
+        type:'POST',
+        url:"{% url 'delete_p' %}",
+        data:serializedData,
+        dataType:'json',
+        success:function(response){
+
+            alert("response:"+response.name);
+            
+        },
+        error: function(response){
+          alert("response:"+response.name);
+
+        }
+
+
+
+
+        
+
+    });
+
+});
+</script>
+<!--script>
+    $("#delete_p1").submit(function(e){
+        e.preventDefault();
+        $("#table2").empty();
+        var serializedData=$(this).serialize();
+        $.ajax({
+            type:'GET',
+            url:"{% url 'delete_p' %}",
+            data:serializedData,
+            dataType:'json',
+            success:function(response){
+                if(response.Kits!='No added data with this username.' && response.Kits!='Not a valid username.'){
+                for(var i=0;i<response.Kits.length;i++){
+                    html='<tr>';
+                    html+='<td>'+response.Kits[i].id+'</td>';
+                    html+='<td>'+response.Kits[i].kiit_name+'</td>';
+                    html+='<td>'+response.Kits[i].kiit_quantity+'</td>';
+                    html+='<td>'+response.Kits[i].address+'</td>';
+                    html+='<td>'+response.Kits[i].ph_no+'</td>';
+                    html+='</tr>';
+                    $("#table2").append(html);}}
+                else{
+                    alert(response.Kits);
+                }
+                    
+            },
+            error: function(response){
+              alert("response:"+response.name);
+    
+            }
+    
+    
+    
+    
+            
+    
+        });
+    
+    });
+    </script!-->
+

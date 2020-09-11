@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Font Icon -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Main css -->
+    <style>
+        .container input[type=text]{
+         border: none;
+      border-bottom: 1px solid #ddd;
+      background: transparent;
+      outline: none;
+      height: 30px;
+      font-size: 16px;
+      opacity: 1;
+      color: #8383af;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 5px;
+      }
+      .container input[type=number]{
+        border: none;
+     border-bottom: 1px solid #ddd;
+     background: transparent;
+     outline: none;
+     height: 30px;
+     font-size: 16px;
+     opacity: 1;
+     color: #8383af;
+     width: auto;
+     margin-bottom: 5px;
+     }
+      .container input[type=password]{
+         border: none;
+      border-bottom: 1px solid #ddd;
+      background: transparent;
+      outline: none;
+      height: 30px;
+      font-size: 16px;
+      opacity: 1;
+      color: #8383af;
+      width: auto;
+      margin-bottom: 5px;
+      }
+      .container input[type=submit] {
+      border:none;
+      outline:none;
+      height: 40px;
+      background:#ffae42;
+      color: #FFFFBF;
+      font-size:16px;
+      font-weight: bold;
+      width: auto;
+      margin-bottom: 20px;
+      margin-left: 470px;
+      }
+      
+      .container input[type=submit]:hover{
+      cursor: pointer;
+      color: black;
+      background-color: orange;
+      }
+      .rcorners1{
+        width:18%;
+      padding:4px 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      
+      }
+      div#envelope{
+        width:;
+      }
+      
+      
+      </style>
+</head>
+<body>
+  <br>
+  {% block content %}
+  <div class="container"><font color=#8383af size="5px">{{ Error }}</font></div>
+  {% endblock %}
+
+    <div class="main">
+        
+        <div class="container">
+        <form id="addh" method="post">
+           {% csrf_token %}
+    <br>
+          <input type="text" name="address" class="form-control address" placeholder="Your address" autocomplete="off" required/><br>
+          <br> <div class="table-repsonsive">
+             <span id="error"></span>
+             <table class="table table-condensed" id="Passenger_table">
+              <tr>
+               <th>House_Location</th>
+               <th>Size</th>
+               <th>Description</th>
+               <th>Rent (in Rs)</th>
+               <th><button type="button" name="add" class="btn btn-success btn-sm add"><span class="glyphicon glyphicon-plus"></span></button></th>
+              </tr>
+             </table>
+             <div>
+              <input type="submit" align="centre" name="submit" class="btn btn-info" value="Donate" />
+              <div><a href="fetch_h_user"><i><b>See ur added House items.</b></i></a></div><br>
+              <div><a href="update_h"><i><b>Update ur added House items.</b></i></a></div><br>
+              <div><a href="delete_h"><i><b>Delete ur added House items.</b></i></a></div><br>
+              <div><a href="after_login"><i><b>Go Back.</b></i></a></div>
+ 
+            </div>
+            </div>
+          </form>
+        </div>
+      </body>
+
+    </html>
+
+    <!-- JS -->
+    <script>
+        var i=0;
+        $(document).ready(function(){
+         
+         $(document).on('click', '.add', function(){
+          var html = '';
+        html += '<tr>';
+          html += '<td><input type="text" name="h_location'+i+'" class="form-control h_location" autocomplete="off" required/></td>';
+          html += '<td><input type="text" name="size'+i+'" maxlength="15" class="form-control size" autocomplete="off" required></td>';
+          html += '<td><input type="text" name="description'+i+'" class="form-control description" autocomplete="off" required></td>';
+          html += '<td><input type="number" name="rent'+i+'" min="0" class="form-control rent" autocomplete="off" required></td>';
+          html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
+          $('#Passenger_table').append(html);i++;
+          return true;
+        
+        
+         });
+         
+         $(document).on('click', '.remove', function(){
+          $(this).closest('tr').remove();
+          i--;
+         });
+         $('#addh').submit(function(e){
+          e.preventDefault();
+          $.ajax({
+            type:'POST',
+            url:"{% url 'addh' %}",
+            data:$(this).serialize(),
+            datatype:'json',
+            success: function(response){
+              alert("response:"+response.message);
+            },
+            error: function(response){
+              alert("response:"+response.message);
+            }
+
+
+
+          });
+        });
+         
+        });
+      </script>
+        

@@ -1,0 +1,301 @@
+{% load static %}
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    html,body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      header {
+        display: flex;
+        size: 100%;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 20px 5%;
+        background-color:rgba(28,28,33,0.95);
+        opacity: 100%;
+      }
+      
+      .logo {
+        cursor: pointer;
+        margin-right: auto;
+      }
+      
+      .nav__links {
+        list-style: none;
+        display: flex;
+      }
+      
+      .nav__links a,
+      .cta,
+      .overlay__content a {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        color: #FFFFFF;
+        text-decoration: none;
+      }
+      
+      .nav__links li {
+        padding: 0px 20px;
+      }
+      
+      .nav__links li a {
+        transition: all 0.3s ease 0s;
+      }
+      
+      .nav__links li a:hover {
+        color: rgba(36,231,244,1);
+      }
+      
+      .cta {
+        margin-left: 20px;
+        padding: 9px 25px;
+        background-color: rgba(36,231,244, 0.815);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+      }
+      
+      .cta:hover {
+        background-color: rgba(31,179,194, 0.815);
+      }
+      
+      /* Mobile Nav */
+      
+      .menu {
+        display: none;
+      }
+      
+      .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        background-color: #24252a;
+        overflow-x: hidden;
+        transition: all 0.5s ease 0s;
+      }
+      
+      .overlay__content {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .overlay a {
+        padding: 15px;
+        font-size: 36px;
+        display: block;
+        transition: all 0.3s ease 0s;
+      }
+      
+      .overlay a:hover,
+      .overlay a:focus {
+        color: #c08b1aef;
+      }
+      .overlay .close {
+        position: absolute;
+        top: 20px;
+        right: 45px;
+        font-size: 60px;
+        color: #edf0f1;
+        cursor: pointer;
+      }
+      
+      @media screen and (max-height: 450px) {
+        .overlay a {
+          font-size: 20px;
+        }
+        .overlay .close {
+          font-size: 40px;
+          top: 15px;
+          right: 35px;
+        }
+      }
+      
+      @media only screen and (max-width: 800px) {
+        .nav__links,
+        .cta {
+          display: none;
+        }
+        .menu {
+          display: initial;
+        }
+      }
+h1 {
+margin: 0;
+padding: 0;
+font-weight: bold;
+font-size: 22px;
+color: #32324e;
+text-align:center;
+margin-bottom: 5%;
+font-family: Courgette;
+}
+.wrapper .registerhead{
+position: relative;
+left: 35%;
+margin-bottom: 10%;
+vertical-align: middle;
+
+}
+body{
+background-image: url("{% static 'man.jpg' %}");
+background-attachment: fixed;
+font-family: Poppins;
+background-position: center;
+background-size: auto auto;
+-webkit-background-size:cover;
+background-size: cover;
+background-repeat: no-repeat;
+height: 122VH;
+width: 200vh;
+}
+.wrapper{
+width: 400px;
+height: 650px;
+color: #A9A9A9;
+top: 73%;
+left: 82%;
+padding: 60px 30px;
+position: absolute;
+transform: translate(-50%,-50%);
+box-sizing: border-box;
+box-shadow: 40px 40px 40px #000;
+background-color: rgba(255,255,255,0.875);
+}
+::placeholder{
+color:#8383af;
+opacity: 1;
+}
+
+.wrapper input[type=textarea], .wrapper input[type=password], .wrapper input[type=email], .wrapper input[type=tel],.wrapper input[type=date],.wrapper input[type=number] {
+border: none;
+border-bottom: 1px solid #ddd;
+background: transparent;
+outline: none;
+height: 30px;                                                     
+font-size: 16px;
+opacity: 1;
+color:  #8383af;
+width: 100%;
+margin-bottom: 20px;
+}
+.wrapper input[type=submit]{
+border:none;
+outline:none;
+height: 40px;
+background:#24E7F4;
+color: #FFFFFF;
+font-size:16px;
+font-weight: bold;
+width: 100%;
+margin-bottom: 20px;
+}
+
+
+.wrapper input[type=submit]:hover{
+cursor: pointer;
+color: black;
+background-color:rgba(31,179,194, 0.89);
+}
+
+input[type=select]{
+width:100%;
+padding:4px 20px;
+border: 1px solid #ccc;
+border-radius: 10px;
+box-sizing: border-box;
+margin-top: 6px;
+margin-bottom: 16px;}
+.container{
+border-radius: 5px;
+background-color: #FFD199;
+padding: 2% 2%;
+width: 30%;
+height: 106%;
+box-shadow: 8px 8px 8px;
+font-family: Arial;
+}
+
+
+</style>
+</head>
+<body>
+<div class="wrapper">
+<h1><font align="center" size="13"><b>Register</b></font></h1>
+<div class="registerhead"></div>
+<form method="POST" id="form1">
+    {% csrf_token %}
+ <input type= "textarea" name="f_name" id="fname" placeholder="First_Name" autocomplete="off" pattern="[A-Z|a-z| ]+" title="Must contain only alphabets" required>
+
+ <input type= "textarea" name="l_name" id= "lname" placeholder="Last_Name" autocomplete="off" pattern="[A-Z|a-z| ]+" title="Must contain only alphabets" required>
+ <input type= "textarea" name="address" id= "address" placeholder="Address" autocomplete="off" required>
+
+<br>
+<input type="textarea" name="phone" id="phone" placeholder="Phone" autocomplete="off" pattern="[0-9]+" title="Please enter valid phone no." maxlength="10" minlength="10" required>
+
+<input type="email" name="email" id="email" placeholder="Email_ID" autocomplete="off" required>
+
+
+<input type="textarea" name="user_name" id="username" placeholder="User_Name" autocomplete="off" pattern="[A-Z|a-z|0-9]+" title="Can contain upper case and can lower case letter and numbers too." maxlength="10" minlength="6" required>
+
+<input type="password" name="password" id="password" placeholder="Password" autocomplete="off" pattern="[A-Z|a-z|0-9]+" maxlength="10" minlength="6" title="Can contain no.,lower case, upper case letter" required>
+<input type="password" name="c_password" id="c_password" placeholder="Confirm_Password" autocomplete="off" pattern="[A-Z|a-z|0-9]+" maxlength="10" minlength="6" title="Can contain no.,lower case or upper case letter" required>
+<input type="submit" name="submit" value="Submit"><br>
+</form>
+<div><form action='back'>
+  <input type="submit" value="Back to home">
+</form></div>
+</div>
+</body>
+</html>
+<script>
+$("#form1").submit(function(e){
+    e.preventDefault();
+    var serializedData=$(this).serialize();
+    $.ajax({
+        type:'POST',
+        url:"{% url 'register1' %}",
+        data:serializedData,
+        dataType:'json',
+        success:function(response){
+  
+            alert("response:"+response.name);
+            
+        },
+        error: function(response){
+          alert("response:"+response.name);
+
+        }
+
+
+
+
+        
+
+    });
+
+});
+</script>
+
+
+
+

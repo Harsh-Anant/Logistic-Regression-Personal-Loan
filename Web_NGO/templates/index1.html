@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+{% load static %}
+<html>
+    <head>
+        <title>Feed Needy</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'css/bootstrap-theme.css.map' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-theme.min.css.map' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.css.map' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css.map' %}" rel="stylesheet">
+        <link href="{% static 'css/glyphicons-halflings-regular.eot' %}">
+        <link href="{% static 'css/glyphicons-halflings-regular.svg' %}">
+        <link href="{% static 'css/glyphicons-halflings-regular.ttf' %}">
+        <link href="{% static 'css/glyphicons-halflings-regular.woff' %}">
+        <link href="{% static 'css/glyphicons-halflings-regular.woff2' %}"">
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    html,body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      header {
+        display: flex;
+        size: 100%;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 20px 5%;
+        background-color: rgba(28,28,33,0.95);
+        opacity: 100%;
+      }
+      
+      .logo {
+        cursor: pointer;
+        margin-right: auto;
+      }
+      
+      .nav__links {
+        list-style: none;
+        display: flex;
+      }
+      
+      .nav__links a,
+      .cta,
+      .overlay__content a {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        color: #FFFFFF;
+        text-decoration: none;
+      }
+      
+      .nav__links li {
+        padding: 0px 20px;
+      }
+      
+      .nav__links li a {
+        transition: all 0.3s ease 0s;
+      }
+      
+      .nav__links li a:hover {
+        color: rgba(36,231,244,1);
+      }
+      
+      .cta {
+        margin-left: 20px;
+        padding: 9px 25px;
+        background-color: rgba(36,231,244, 0.815);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+      }
+      
+      .cta:hover {
+        background-color: rgba(31,179,194, 0.815);
+      }
+      
+      
+      .menu {
+        display: none;
+      }
+      
+      .btn_style{
+          background-color: #24E7F4;
+          color: black;
+      }
+      
+      .con {
+          padding:0;
+          margin:0;
+      }   
+      .img_style{
+           float: left;
+           width: 30%;
+           height: 100%;
+           align-items:baseline;
+          margin-top: 40px;
+          margin-bottom: 40px;
+          padding: 15px 15px 15px 15px;
+           align-items :center;
+           background-color: rgba(28,28,33,0.95);
+           
+      }
+      .con_right{
+          float: right;
+          width: 60%;
+          height: 100%;
+          align-items:center;
+          margin-top: 40px;
+      }
+      .heading_style{
+          
+          width: 100%;
+          height: 20%;
+          margin-top: 50px;
+          margin-bottom: 30px;
+         color:#24E7F4;
+         font-family: "Algerian", sans-serif;
+        font-weight: 600;
+          text-align: center;
+          
+      }
+      
+      .content_style{
+          
+         
+         width: 100%;
+           margin-bottom: 40px;
+            color:#454545;
+         font-family: "Montserrat",serif;
+           text-align: center;
+      }
+      
+      #back_image{
+          background-image: url("{% static 'back.jpg' %}");
+          background-attachment: fixed;
+          font-family: Poppins;
+          background-position: center;
+          background-size: auto auto;
+          -webkit-background-size:cover;
+          background-size: cover;
+          background-repeat: no-repeat;
+          height: 122VH;
+          width: 200vh;
+      }
+      
+      .mission_head{
+          
+          width: 100%;
+         font-size: 42px;
+         font-weight: 600;
+          margin-top: 30px;
+          margin-bottom: 10px;
+         color:#24E7F4;
+         font-family: "Algerian", sans-serif;
+        font-weight: 600;
+          text-align: center;
+          
+      }
+      .mission_con{
+          
+         
+         width: 100%;
+           margin-bottom: 10px;
+            color:white;
+         font-family: "Montserrat",serif;
+           text-align: center;
+      }
+      
+      .content1{
+          float:left;
+          width: 50%;
+          align-items:center;
+          text-align: left;
+          padding: 15px 15px 15px 15px;
+          margin-left: 15px;
+      }
+      
+      .content2{
+          float:right;
+          width: 45%;
+          height: 100%;
+          align-items:center;
+          text-align: left;
+          padding: 15px 15px 15px 15px;
+          
+      }
+      
+      .thumbnail img {
+          height:250px;
+          width:100%;
+          background-color: rgba(28,28,33,0.95);
+      }
+      
+     .thumbnail{
+     background-color:transparent;  
+     background: transparent;
+     }
+     
+      .foot{
+          background-color: rgba(28,28,33,0.95);
+      }
+     
+      .c{
+          margin-top: 10px;
+          padding: 10px 10px 10px 10px;
+          align-items :center;
+          background-color: white;
+          font-family: "Montserrat", sans-serif;
+          font-weight: 500;
+          
+          color:#24E7F4;
+      }
+      
+      .c a:link {
+          color:rgba(36,231,244,1);
+      }
+      
+      .c a:visited{
+          color:rgba(36,231,244,1);
+      }
+    
+      .c a:hover{
+          color:rgba(31,179,194, 0.815);
+      }
+      
+      .c a:active{
+          color:black;
+      }
+      
+     
+      
+ </style>
+    </head>
+    <body>
+     <header>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="Data/fetch_p">PPE Items</a></li>
+                <li><a href="Data/fetch_o">Other Items</a></li>
+                <li><a href="Data/fetch_p_item">Find PPE Items</a></li>
+                <li><a href="Data/fetch_o_item">Find Other Items</a></li>
+                <li><a href="Data/fetch_h_rent">House rents</a></li>
+                <li><a href="#About_us">About Us</a></li>
+                <li><a href="#our_mission">Our Mission</a></li>
+                <li><a href="Data/contact">Contact Us</a></li>
+                <li><a href="login/login">Login </a></li>
+            </ul> 
+        </nav>
+        <a class="cta" href="register/index">Register</a>
+        <p onclick="openNav()" class="menu cta">Menu</p>
+    </header>
+    <div id="mobile__menu" class="overlay">
+        <a class="close" onclick="closeNav()">&times;</a>
+        <div class="overlay__content">
+            <a href="#">About Us</a>
+            <a href="#">Our Mission</a>
+            <a href="#">Login</a>
+            <a href="register/register">Register</a>
+        </div>
+    </div>
+        <div class="container-fluid con">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-pause="null">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="{% static 'slums.jpg' %}" alt="Slum Child">
+      <div class="carousel-caption">
+        <center>
+                <div id="caption1">
+                    <h1>HUNGER</h1>
+                    <h2>"If you can't feed a hundred people, then just feed one."</h2>
+                    <a href="register/index" target="_blank"><button type="button" class="btn btn_style">Register</button></a>
+                </div>
+            </center>
+      </div>
+    </div>
+    <div class="item">
+      <img src="{% static 'homeless.jpg' %}" alt="Clotheless Man">
+      <div class="carousel-caption">
+         <center>
+                <div id="caption1">
+                    <h1>CLOTHING</h1>
+                    <h2>"Torn clothes: not a symbol of poverty rather show the hard work done to secure a chapati for one's meal."</h2>
+                    <a href="#About_us"><button type="button" class="btn btn_style">About Us</button></a>
+                </div>
+            </center>
+      </div>
+    </div>
+    <div class="item">
+      <img src="{% static 'woman.jpg' %}" alt="Homeless People">
+      <div class="carousel-caption">
+         <center>
+                <div id="caption1">
+                    <h1>HOMELESSNESS</h1>
+                    <h2>92% of homeless women have experienced severe physical or sexual abuse at some point in their lives.</h2>
+                    <a href="#our_mission"><button type="button" class="btn btn_style">Our Mission</button></a>
+                </div>
+            </center>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+        <div id="About_us" class="container">
+            <div class="container img_style">
+                <img class="img-responsive" src="{% static 'beggar.jpg' %}" alt="">
+            </div>
+            <div class="container con_right">
+                <div class="container  heading_style">
+                    <h1>Replenishing life in the “Dead”</h1>
+                </div>
+                <div class="container content_style">
+                    <h3>Few eyes hint at a lost promise or offer a glimmer of hope. It’s easy to walk past those people but it’s tough to forget those eyes once caught up with yours.Our project is a mission, dedicated to all those millions of homeless  men and women struggling to live under a roof, crying mothers suffering through the misery of looking at  their children screaming out of hunger, the fathers selling their skin to protect the skin of their family, to everyone trapped in the viscous cycle of “helplessness” also known as  poverty.</h3>
+                </div>
+            </div>
+        </div>    
+                
+               
+       <div id="back_image" class="container-fluid">
+           <div id="our_mission" class="container mission_head">OUR MISSION</div>
+           <div class="container mission_con" >
+           <div class="container content1">
+               
+              <br><center> <h2><strong><u>The Givers</u></strong></h2></center><br><br><br>
+<h3><b>You can, if you want and you have</b></h3><br>
+
+<h4>Our project has two categories, The first one being for the people who want to donate, and have clothes, food or any form of shelter that they can provide for the poor to use or to any other person working for the welfare of the underprivileged can register here and donate.</h4><br><br>
+
+<h3><b>You can, if you want but don’t have</b></h3></br>
+
+<h4>This is the second category of our project for those who want to help but can’t donate,they can register here and help the dependent in being independent by bringing them to this platform.Donating is certainly one of the many forms of help but help comes in many forms.</h4>   
+               
+           </div>
+           <div class="container content2">
+                <br><center> <h2><strong><u>The Takers</u></strong></h2></center><br><br><br>
+                <h4>To all those slum dwellers, the people spending sleepless nights on roads footpath or railways stations,to all those small children who walk through the harsh world barefoot</h4>
+           </div>
+       </div>
+         <div class="container-fluid c">
+            <div class="row">
+                <div class=" col-sm-4">
+                    <a href="Data/fetch_h" ><div class=" thumbnail">
+                            <img class="img-responsive landscape" src="{% static 'food3.jpg' %}" alt="">
+                            <div class="caption">
+                                <h3>Housing Repository</h3>
+                                <p>See all house items present for homes.</p>
+                            </div>
+                        </div> 
+                    </a>
+                </div>
+               
+                <div class="col-sm-4">
+                    <a href="Data/fetch_c" ><div class=" thumbnail">
+                            <img class="img-responsive landscape" src="{% static 'people-1550501__480.jpg' %}" alt="">
+                            <div class="caption">
+                                <h3>Clothing Repository</h3>
+                                <p>See all cloth items present for clothes.</p>
+                            </div>
+                        </div> 
+                    </a>
+                </div>
+                
+                <div class="col-sm-4">
+                    <a href="Data/fetch_f" ><div class=" thumbnail">
+                            <img class="img-responsive landscape" src="{% static 'food1.jpg' %}" alt="">
+                            <div class="caption">
+                                <h3>Fooding Repository</h3>
+                                <p>See all food items present for foods.</p>
+                            </div>
+                        </div> 
+                    </a>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <a href="Data/fetch_c_item" ><div class=" thumbnail">
+                            <img class="img-responsive landscape" src="{% static 'food5.jpg' %}" alt="">
+                            <div class="caption">
+                                <h3>Clothing Repository</h3>
+                                <p>See all clothes items based on item name of clothes.</p>
+                            </div>
+                        </div> 
+                    </a>
+                </div>
+               
+                <div class="col-sm-4">
+                    <a href="Data/fetch_f_item" ><div class=" thumbnail">
+                            <img class="img-responsive landscape" src="{% static 'food2.jpg' %}" alt="">
+                            <div class="caption">
+                                <h3>Fooding Repository</h3>
+                                <p>See all food items based on item name of foods.</p>
+                            </div>
+                        </div> 
+                    </a>
+                </div>
+        </div>     
+       </div>  
+            <div class="container-fluid foot">
+            
+        </div>
+      </div>   
+       
+       
+          
+      
+           
+               
+        
+        
+    </body>
+</html>
